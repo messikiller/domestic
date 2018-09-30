@@ -1,8 +1,8 @@
 <template>
   <div class="main">
-    <Sider></Sider>
+    <Sider v-if="showSider"></Sider>
     <Layout class="righter">
-      <Header class="header"></Header>
+      <Header class="header" @on-toggle="handleToggleSider"></Header>
       <Content class="content">
         <Card class="paper" dis-hover>
           <div>Content</div>
@@ -21,6 +21,16 @@ export default {
   components: {
     Sider,
     Header
+  },
+  data () {
+    return {
+      showSider: true
+    }
+  },
+  methods: {
+    handleToggleSider: function () {
+      this.showSider = !this.showSider
+    }
   }
 }
 </script>

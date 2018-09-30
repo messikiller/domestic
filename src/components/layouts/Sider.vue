@@ -35,7 +35,11 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      isCollapsed: true
+    }
+  }
 }
 </script>
 
