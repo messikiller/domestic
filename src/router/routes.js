@@ -2,9 +2,9 @@ module.exports = [
   { path: '/login', name: 'authLogin', component: () => import('~/Login.vue'), meta: { requireAuth: 'F' } },
   {
     path: '/',
-    component: () => import('~/layouts/Admin.vue'),
+    component: () => import('~/Admin.vue'),
     children: [
-      { path: '/index', name: 'index', component: () => { import('~/Login.vue') } }
+      { path: '/', name: 'index', component: () => import('~/Login.vue') }
     ]
   }
 ]
