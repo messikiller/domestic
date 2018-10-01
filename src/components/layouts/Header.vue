@@ -2,11 +2,11 @@
   <Header class="header">
     <Menu mode="horizontal" class="menu">
       <div class="left-wrapper">
-        <Icon type="md-menu" size="28" @click="handleClickToggle" />
+        <Icon type="md-menu" size="28" :class="{'rotated-icon': rotated }" @click="handleClickToggle" />
         <Breadcrumb style="margin-left: 15px;">
           <BreadcrumbItem><Icon type="ios-home-outline"></Icon>&nbsp;Home</BreadcrumbItem>
-          <BreadcrumbItem>Components</BreadcrumbItem>
-          <BreadcrumbItem>Layout</BreadcrumbItem>
+          <BreadcrumbItem v-show="currentLocation.parent.title">{{ currentLocation.parent.title }}</BreadcrumbItem>
+          <BreadcrumbItem v-show="currentLocation.child.title">{{ currentLocation.child.title }}</BreadcrumbItem>
         </Breadcrumb>
       </div>
       <div class="user-menu">
@@ -26,11 +26,17 @@
 export default {
   data () {
     return {
-      toggleIcon: 'md-menu'
+      rotated: false
+    }
+  },
+  computed: {
+    currentLocation: function () {
+      return this.$store.state.currentLocation
     }
   },
   methods: {
     handleClickToggle: function () {
+      this.rotated = !this.rotated
       this.$emit('on-toggle')
     }
   }
@@ -38,6 +44,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.rotated-icon {
+  transform: rotate(-90deg);
+  transition:transform 0.2s ease;
+}
 .header {
   padding: 0;
   display: flex;

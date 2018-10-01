@@ -3,41 +3,45 @@
     <div class="logo">
       <Icon type="md-chatboxes" size="45" color="#808695" />
     </div>
-    <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']" accordion>
-      <Submenu name="1">
+    <Menu theme="dark" width="auto" accordion @on-select="hanleSelectChild">
+      <Submenu :name="index" v-for="(nav, index) in navRoutes" :key="index">
         <template slot="title">
-          <Icon type="ios-navigate"></Icon>
-          Item 1
+          <Icon :type="nav.icon" size="20"></Icon>
+          {{ nav.title }}
         </template>
-        <Menu-Item name="1-1">Option 1</Menu-Item>
-        <Menu-Item name="1-2">Option 2</Menu-Item>
-        <Menu-Item name="1-3">Option 3</Menu-Item>
-      </Submenu>
-      <Submenu name="2">
-        <template slot="title">
-          <Icon type="ios-keypad"></Icon>
-          Item 2
-        </template>
-        <Menu-Item name="2-1">Option 1</Menu-Item>
-        <Menu-Item name="2-2">Option 2</Menu-Item>
-      </Submenu>
-      <Submenu name="3">
-        <template slot="title">
-          <Icon type="ios-analytics"></Icon>
-          Item 3
-        </template>
-        <Menu-Item name="3-1">Option 1</Menu-Item>
-        <Menu-Item name="3-2">Option 2</Menu-Item>
+        <Menu-Item :name="index + '-' + chIdx" v-for="(child, chIdx) in nav.children" :key="chIdx">{{ child.title }}</Menu-Item>
       </Submenu>
     </Menu>
   </Sider>
 </template>
 
 <script>
+import utils from '@/utils'
+
 export default {
   data () {
     return {
-      isCollapsed: true
+      navRoutes: []
+    }
+  },
+  mounted () {
+    this.navRoutes = utils.ui.getSiderList()
+  },
+  methods: {
+    hanleSelectChild: function (name) {
+      var pos = name.split('-')
+      var parent = this.navRoutes[pos[0]]
+      var child = parent.children[pos[1]]
+      this.$store.commit('setCurrentLocation', {
+        parent: {
+          title: parent.title,
+          route: parent.route
+        },
+        child: {
+          title: child.title,
+          route: child.route
+        }
+      })
     }
   }
 }

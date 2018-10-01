@@ -1,11 +1,11 @@
 <template>
   <div class="main">
-    <Sider v-if="showSider"></Sider>
+    <Sider v-show="showSider"></Sider>
     <Layout class="righter">
       <Header class="header" @on-toggle="handleToggleSider"></Header>
       <Content class="content">
         <Card class="paper" dis-hover>
-          <div>Content</div>
+          <router-view />
         </Card>
       </Content>
       <Footer class="footer">SonoScape All Right Reserved &copy; 2018</Footer>

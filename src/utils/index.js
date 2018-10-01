@@ -1,5 +1,9 @@
 import request from './request'
+import auth from './auth'
+import ui from './ui'
 
 export default {
-    request
+  auth,
+  ui,
+  request
 }
