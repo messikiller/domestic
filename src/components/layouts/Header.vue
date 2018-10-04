@@ -14,7 +14,7 @@
           <span slot="title">
             <Icon type="md-contact" size="20" />messikiller
           </span>
-          <Menu-Item name="1">个人中心</Menu-Item>
+          <Menu-Item name="1" :to="{ name: 'userMe' }">个人中心</Menu-Item>
           <Menu-Item name="2">注销退出</Menu-Item>
         </Submenu>
       </div>

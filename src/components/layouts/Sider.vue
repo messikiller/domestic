@@ -9,15 +9,18 @@
           <Icon :type="nav.icon" size="20"></Icon>
           {{ nav.title }}
         </template>
-        <Menu-Item :name="index + '-' + chIdx" v-for="(child, chIdx) in nav.children" :key="chIdx">{{ child.title }}</Menu-Item>
+        <Menu-Item
+          v-for="(child, chIdx) in nav.children"
+          :name="index + '-' + chIdx"
+          :key="chIdx"
+          :to="{ name: child.route }"
+        >{{ child.title }}</Menu-Item>
       </Submenu>
     </Menu>
   </Sider>
 </template>
 
 <script>
-import utils from '@/utils'
-
 export default {
   data () {
     return {
@@ -25,7 +28,7 @@ export default {
     }
   },
   mounted () {
-    this.navRoutes = utils.ui.getSiderList()
+    this.navRoutes = this.$utils.ui.getSiderList()
   },
   methods: {
     hanleSelectChild: function (name) {

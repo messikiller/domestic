@@ -2,8 +2,9 @@
   <div class="bg">
     <Card dis-hover style="width: 400px;">
       <div class="title">
+        <h3>国内客诉反馈系统</h3>
         <Divider>
-          <h4>国内客诉反馈</h4>
+          <Icon type="md-chatbubbles" size="22" />
         </Divider>
       </div>
       <Form ref="dataForm" :model="form" :rules="rules">
@@ -74,5 +75,6 @@ export default {
 .title {
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 10px;
 }
 </style>

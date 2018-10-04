@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import utils from '@/utils'
+import routes from './routes'
 
 Vue.use(Router)
 
 const router = new Router({
-  routes: require('./routes')
+  routes
 })
 
 router.beforeEach((to, from, next) => {
