@@ -10,3 +10,7 @@ export const login = (options) => {
     expired_at: random.natural(10000, 99999999)
   })
 }
+
+export const logout = (options) => {
+  return utils.request.mockSuccess('OK')
+}

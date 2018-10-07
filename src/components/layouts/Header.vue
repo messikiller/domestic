@@ -1,6 +1,6 @@
 <template>
   <Header class="header">
-    <Menu mode="horizontal" class="menu">
+    <Menu mode="horizontal" class="menu" @on-select="handleMenuItemSelected">
       <div class="left-wrapper">
         <Icon type="md-menu" size="28" :class="{'rotated-icon': rotated }" @click="handleClickToggle" />
         <Breadcrumb style="margin-left: 15px;">
@@ -14,8 +14,8 @@
           <span slot="title">
             <Icon type="md-contact" size="20" />messikiller
           </span>
-          <Menu-Item name="1" :to="{ name: 'userMe' }">个人中心</Menu-Item>
-          <Menu-Item name="2">注销退出</Menu-Item>
+          <Menu-Item name="userCenter" :to="{ name: 'userMe' }">个人中心</Menu-Item>
+          <Menu-Item name="logout" @click="handleLogout">注销退出</Menu-Item>
         </Submenu>
       </div>
     </Menu>
@@ -35,9 +35,20 @@ export default {
     }
   },
   methods: {
+    handleMenuItemSelected: function (name) {
+      if (name === 'logout') {
+        this.handleLogout()
+      }
+    },
     handleClickToggle: function () {
       this.rotated = !this.rotated
       this.$emit('on-toggle')
+    },
+    handleLogout: function () {
+      this.$api.logout().then(response => {
+        this.$utils.auth.setToken('')
+        this.$router.replace({ name: 'authLogin' })
+      })
     }
   }
 }
